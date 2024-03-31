@@ -7,11 +7,11 @@ const app = express();
 const server = http.createServer(app);
 
 // Serve the React app's static files
-app.use(express.static(path.join(__dirname, "../client")));
+app.use(express.static(path.join(__dirname, "../client/dist")));
 
 // Serve the HTML page for the root route
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client", "index.html"));
+  res.sendFile(path.join(__dirname, "../client/dist", "index.html"));
 });
 
 const { Server } = require("socket.io");
