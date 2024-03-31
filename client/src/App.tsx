@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { RiSendPlane2Fill } from "react-icons/ri";
 import io from "socket.io-client";
 
-const socket = io("http://localhost:3000"); // Connect to your Socket.IO server
+// const socket = io("http://localhost:3000"); // Connect to your Socket.IO server
+const socket = io("https://chat-app-dvqz.onrender.com");
 
 const style :any = {
   send : "self-end text-xl font-medium bg-blue-500 text-white w-fit max-w-[50%] rounded-xl px-10 py-2",
