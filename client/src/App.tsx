@@ -20,7 +20,7 @@ interface message {
 }
 
 function App(): JSX.Element {
-  const [notification] = useState(new Audio("src/sounds/whatsapp_notification.mp3")) ; 
+  const [notification] = useState(new Audio("./src/sounds/whatsapp_notification.mp3")) ; 
   // console.log(notification) ; 
   const messageContainer = useRef<HTMLDivElement>(null);
 
