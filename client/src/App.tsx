@@ -20,6 +20,8 @@ interface message {
 }
 
 function App(): JSX.Element {
+  const [notification] = useState(new Audio("src/sounds/whatsapp_notification.mp3")) ; 
+  // console.log(notification) ; 
   const messageContainer = useRef<HTMLDivElement>(null);
 
   const [messages, setMessages] = useState<message[]>([]);
@@ -31,6 +33,7 @@ function App(): JSX.Element {
     socket.on("chat message", (msg: string) => {
       addMessage(msg, "receive");
     });
+    if(messages[messages.length-1]?.status == "receive") notification.play() ; 
 
     scrollToBottom(messageContainer);
 
