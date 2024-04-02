@@ -22,19 +22,19 @@ const MessageContainer = ({ messages }: Props) => {
     function () {
       scrollToBottom(messageContainer);
     },
-    [messages]
+    [messages],
   );
 
   return (
     <div
-      className="h-full w-screen overflow-y-auto py-8 px-4 flex flex-col gap-6"
+      className="flex h-full w-screen flex-col gap-6 overflow-y-auto px-4 py-8"
       ref={messageContainer}
     >
       {messages.map((msg: message, index: number) => (
         <div
           className={`${
             style[msg.status]
-          } break-words shadow tablet:text-sm mobile:text-xs mobile:px-5`}
+          } break-words shadow mobile:px-5 mobile:text-xs tablet:text-sm`}
           key={index}
         >
           {msg.message}

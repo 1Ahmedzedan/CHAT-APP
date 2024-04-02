@@ -1,4 +1,4 @@
-import { useEffect , useState } from "react";
+import { useEffect, useState } from "react";
 
 import { socket } from "./services/seckot";
 
@@ -14,7 +14,6 @@ interface message {
 function App() {
   const [notification] = useState(new Audio("whatsapp_notification.mp3"));
   const [messages, setMessages] = useState<message[]>([]);
-  
 
   useEffect(() => {
     // Listen for chat messages from the server
@@ -29,20 +28,16 @@ function App() {
     };
   }, [messages]);
 
-  
-
   const addMessage = (msg: string, status: string) => {
     const handleMsg: message = { status: status, message: msg };
     setMessages((prevMessages) => [...prevMessages, handleMsg]);
   };
 
-  
-
   return (
-    <div className=" bg-stone-100 h-screen relative flex flex-col justify-between">
+    <div className=" relative flex h-screen flex-col justify-between bg-stone-100">
       <Header />
-      <MessageContainer messages={messages}/>
-      <Form addMessage={addMessage}/>
+      <MessageContainer messages={messages} />
+      <Form addMessage={addMessage} />
     </div>
   );
 }

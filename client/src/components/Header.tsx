@@ -1,7 +1,7 @@
 const Header = () => {
   return (
-    <div className="bg-slate-200 py-4 w-full flex items-center justify-center mobile:py-2">
-      <p className="text-4xl tracking-widest font-semibold tablet:text-2xl mobile:text-xl">
+    <div className="flex w-full items-center justify-center bg-slate-200 py-4 mobile:py-2">
+      <p className="text-4xl font-semibold tracking-widest mobile:text-xl tablet:text-2xl">
         CHAT APP
       </p>
     </div>
