@@ -5,7 +5,7 @@ export default {
     extend: {
       screens: {
         mobile: { max: "768px" },
-        tablet: { min: "769px", max: "1024px" },
+        tablet: { min: "769px", max: "1230px" },
       },
     },
   },

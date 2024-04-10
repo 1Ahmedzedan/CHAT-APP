@@ -5,6 +5,7 @@ import { socket } from "./services/seckot";
 import Header from "./components/Header";
 import MessageContainer from "./components/MessageContainer";
 import Form from "./components/Form";
+import Register from "./components/Register";
 
 interface message {
   status: string;
@@ -34,11 +35,12 @@ function App() {
   };
 
   return (
-    <div className=" relative flex h-screen flex-col justify-between bg-stone-100">
-      <Header />
-      <MessageContainer messages={messages} />
-      <Form addMessage={addMessage} />
-    </div>
+    // <div className=" relative flex h-screen flex-col justify-between bg-stone-100">
+    //   <Header />
+    //   <MessageContainer messages={messages} />
+    //   <Form addMessage={addMessage} />
+    // </div>
+    <Register/>
   );
 }
 
