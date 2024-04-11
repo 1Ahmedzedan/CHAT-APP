@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 
 import { socket } from "./services/seckot";
 
-import Header from "./components/Header";
+
+import { HashRouter, Route, Routes } from "react-router-dom";
+import RegisterPage from "./components/RegisterPage";
+import ChatPage from "./components/ChatPage";
 import MessageContainer from "./components/MessageContainer";
-import Form from "./components/Form";
-import Register from "./components/Register";
+import ChatStore from "./context/ChatStore";
 
 interface message {
   status: string;
@@ -14,7 +16,7 @@ interface message {
 
 function App() {
   const [notification] = useState(new Audio("whatsapp_notification.mp3"));
-  const [messages, setMessages] = useState<message[]>([]);
+  const [messages, setMessages] = useState<message[]>([{status:"send" , message:"zedan"}]);
 
   useEffect(() => {
     // Listen for chat messages from the server
@@ -35,12 +37,16 @@ function App() {
   };
 
   return (
-    // <div className=" relative flex h-screen flex-col justify-between bg-stone-100">
-    //   <Header />
-    //   <MessageContainer messages={messages} />
-    //   <Form addMessage={addMessage} />
-    // </div>
-    <Register/>
+    <ChatStore>
+      <HashRouter>
+        <Routes>
+          <Route path="/" element={<RegisterPage/>} />
+          <Route path="/chat" element={<ChatPage/>}>
+            <Route path="/chat/:name" element={<MessageContainer/>}/>
+          </Route>
+        </Routes>
+      </HashRouter>
+    </ChatStore>
   );
 }
 
