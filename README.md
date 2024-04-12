@@ -8,6 +8,10 @@ Chat App is a real-time messaging application that allows users to communicate w
 - User authentication: Securely authenticate users to access the chat application.
 - Responsive design: The app is responsive and works seamlessly on all devices.
 
+## Live Demo
+
+Check out the live demo of the Chat App [here](https://chat-app-dvqz.onrender.com)!
+
 ## Technologies Used
 
 - Socket.IO
