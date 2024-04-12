@@ -14,9 +14,7 @@ function App() {
         <ChatStore>
           <Routes>
             <Route path="/" element={<RegisterPage />} />
-            <Route path="/chat" element={<ChatPage />}>
-              <Route path="/chat/:name" element={<MessageContainer />} />
-            </Route>
+            <Route path="/chat" element={<ChatPage />} />
           </Routes>
         </ChatStore>
       </HashRouter>

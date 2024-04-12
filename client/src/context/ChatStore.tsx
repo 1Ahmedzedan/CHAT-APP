@@ -23,6 +23,7 @@ interface ChatValues {
   messages: message[];
   addMessage: Function;
   chatType: "private" | "public";
+  handleCloseChat: Function;
 }
 
 const ChatContext = createContext<ChatValues | null>(null);
@@ -57,7 +58,14 @@ const ChatStore = ({ children }: { children: ReactNode }) => {
   const selectCurrentUser = (user: string, type: "private" | "public") => {
     setCurrentUser(user);
     setChatType(type);
-    if(currentUser.length!==0) setMessages([]);
+    if (currentUser.length !== 0) setMessages([]);
+  };
+
+  const handleCloseChat = (event?: KeyboardEvent) => {
+    if (event===undefined || event?.key === "Escape") {
+      setCurrentUser("");
+      setMessages([]);
+    }
   };
 
   useEffect(() => {
@@ -76,6 +84,8 @@ const ChatStore = ({ children }: { children: ReactNode }) => {
       if (from !== username) addMessage(message, "receive", from);
     });
 
+    document.addEventListener("keydown", handleCloseChat);
+
     if (messages[messages.length - 1]?.status == "receive") notification.play();
 
     //clean up
@@ -83,6 +93,7 @@ const ChatStore = ({ children }: { children: ReactNode }) => {
       socket.off("get_users");
       socket.off("chat message");
       socket.off("private message");
+      document.removeEventListener("keydown", handleCloseChat);
     };
   }, [messages]);
 
@@ -97,6 +108,7 @@ const ChatStore = ({ children }: { children: ReactNode }) => {
         messages,
         addMessage,
         chatType,
+        handleCloseChat
       }}
     >
       {children}

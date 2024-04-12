@@ -7,10 +7,10 @@ import SideBar from "./SideBar";
 const ChatPage = () => {
   const context = useChatContext();
   return (
-    <div className="flex h-screen w-full divide-x-2 divide-stone-300">
+    <div className="flex h-screen w-full">
       <SideBar />
-      {context?.currentUser.length !==0 && (
-        <div className="relative flex h-screen w-[75%] flex-col justify-between">
+      {context?.currentUser.length !== 0 && (
+        <div className="relative flex h-screen w-[75%] flex-col justify-between mobile:w-[100%]">
           <Header />
           <MessageContainer />
           <Form />
