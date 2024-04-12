@@ -6,19 +6,24 @@ import { RiSendPlane2Fill } from "react-icons/ri";
 
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
+import { useChatContext } from "../context/ChatStore";
 
-interface Props {
-  addMessage?: Function;
-}
-const Form = ({ addMessage }: Props) => {
+const Form = () => {
   const [input, setInput] = useState<string>("");
   const [openImojiList, setOpenImojiList] = useState<boolean>(false);
+  const context = useChatContext() ; 
 
   const handleMessageSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (input.trim() !== "") {
-      addMessage?.(input, "send");
-      socket.emit("chat message", input); // Send message to server
+      context?.addMessage?.(input, "send",context.username);
+      const to = context?.chatType === "public" ? "all" : context?.currentUser; 
+      console.log(to) ; 
+      const data = {
+        to,
+        message:input,
+      }
+      socket.emit("chat message", data); // Send message to server
       setInput("");
     }
   };

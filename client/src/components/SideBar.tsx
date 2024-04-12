@@ -1,56 +1,20 @@
+import { useChatContext } from "../context/ChatStore";
+import ProfileTab from "./ProfileTab";
 import User from "./User";
 
 const SideBar = () => {
+  const context = useChatContext();
+
   return (
-    <div className="h-screen overflow-y-auto w-[25%] bg-stone-50 divide-y-2 divide-stone-200">
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
-      <User />
+    <div className="h-screen w-[25%] bg-stone-50">
+      <ProfileTab />
+      <div className="h-[calc(100%-64px)] w-full divide-y-2 divide-stone-200 overflow-y-auto bg-stone-50">
+        <User username="Public Chat" type="public"/>
+        {context?.users?.map(
+          (user: string, index: number) =>
+            context.username != user && <User username={user} key={index} />,
+        )}
+      </div>
     </div>
   );
 };

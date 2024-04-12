@@ -2,15 +2,20 @@ import Logo from "./Logo";
 import Welcome from "../assets/Welcome.gif";
 import { useChatContext } from "../context/ChatStore";
 import { useState } from "react";
+import { handleToastMessage } from "../utils/helper";
 const RegisterPage = () => {
   const context = useChatContext();
   const [name, setName] = useState("");
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    context?.createUser(name) ; 
+    if(name.trim().length===0){
+      handleToastMessage("Please Enter Your User name" , "warning") ; 
+      return ; 
+    }
+    context?.createUser(name.trim()) ; 
   };
-  
+
   return (
     <div className="flex min-h-screen flex-col justify-between p-8 mobile:p-4">
       <div>
