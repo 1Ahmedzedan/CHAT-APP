@@ -6,19 +6,24 @@ import { RiSendPlane2Fill } from "react-icons/ri";
 
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
+import { useChatContext } from "../context/ChatStore";
 
-interface Props {
-  addMessage: Function;
-}
-const Form = ({ addMessage }: Props) => {
+const Form = () => {
   const [input, setInput] = useState<string>("");
   const [openImojiList, setOpenImojiList] = useState<boolean>(false);
+  const context = useChatContext() ; 
 
   const handleMessageSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (input.trim() !== "") {
-      addMessage(input, "send");
-      socket.emit("chat message", input); // Send message to server
+      context?.addMessage?.(input, "send",context.username);
+      const to = context?.chatType === "public" ? "all" : context?.currentUser; 
+      console.log(to) ; 
+      const data = {
+        to,
+        message:input,
+      }
+      socket.emit("chat message", data); // Send message to server
       setInput("");
     }
   };
@@ -28,28 +33,28 @@ const Form = ({ addMessage }: Props) => {
   };
 
   return (
-    <div className="flex w-screen items-center justify-center bg-blue-300 py-4 mobile:py-2">
+    <div className="flex w-full items-center justify-center bg-blue-500 py-2 mobile:py-2">
       <form
         className="relative flex w-full items-center justify-center gap-10 mobile:gap-5 tablet:gap-5"
         onSubmit={handleMessageSubmit}
       >
         <button
           type="button"
-          className=" text-3xl text-stone-600 hover:text-black mobile:text-2xl"
+          className=" text-2xl text-gray-300 hover:text-gray-200 transition-all duration-500 mobile:text-2xl"
           onClick={() => setOpenImojiList((e) => !e)}
         >
           {openImojiList ? <IoCloseSharp /> : <FaRegFaceSmileBeam />}
         </button>
-        <input
-          type="text"
+        <textarea
+          rows={1}
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className="w-[60%] rounded-full bg-gray-50 px-10 py-3 text-xl focus:outline-none mobile:px-8 mobile:py-1 mobile:text-sm tablet:px-8 tablet:py-1 tablet:text-lg"
-        />
+          className="w-[60%] resize-none rounded bg-gray-50 px-3 py-2 text-sm focus:outline-none mobile:px-8 mobile:py-1 mobile:text-sm tablet:px-8 tablet:py-1 tablet:text-lg"
+        ></textarea>
 
         <button
           type="submit"
-          className="rounded-full bg-blue-600 p-3 text-center text-2xl text-gray-50 transition-all duration-300 hover:bg-blue-500 mobile:p-2 mobile:text-lg tablet:p-2 tablet:text-lg"
+          className="rounded-full bg-blue-900 p-2 text-center text-xl text-gray-50 transition-all duration-300 hover:bg-blue-800 mobile:p-2 mobile:text-lg tablet:p-2 tablet:text-lg"
         >
           <RiSendPlane2Fill />
         </button>

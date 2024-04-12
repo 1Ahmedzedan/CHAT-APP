@@ -1,44 +1,31 @@
-import { useEffect, useRef } from "react";
-import { scrollToBottom } from "../utils/helper";
+import { useEffect } from "react";
+import Message from "./Message";
+import { useChatContext } from "../context/ChatStore";
+import useScrollToButton from "../hooks/useScrollToButton";
 
 interface message {
   status: string;
   message: string;
+  user: string;
 }
 
-interface Props {
-  messages: message[];
-}
-
-const style: any = {
-  send: "self-end text-xl font-medium bg-blue-500 text-white w-fit max-w-[70%] rounded-xl px-10 py-2",
-  receive:
-    "text-xl font-medium bg-white w-fit max-w-[70%] rounded-xl px-10 py-2",
-};
-
-const MessageContainer = ({ messages }: Props) => {
-  const messageContainer = useRef<HTMLDivElement>(null);
+const MessageContainer = () => {
+  const context = useChatContext();
+  const { ref, scrollToBottom } = useScrollToButton();
   useEffect(
     function () {
-      scrollToBottom(messageContainer);
+      scrollToBottom();
     },
-    [messages],
+    [context?.messages],
   );
 
   return (
     <div
-      className="flex h-full w-screen flex-col gap-6 overflow-y-auto px-4 py-8"
-      ref={messageContainer}
+      className="flex h-full w-full flex-col gap-6 overflow-y-auto px-4 py-8"
+      ref={ref}
     >
-      {messages.map((msg: message, index: number) => (
-        <div
-          className={`${
-            style[msg.status]
-          } break-words shadow mobile:px-5 mobile:text-xs tablet:text-sm`}
-          key={index}
-        >
-          {msg.message}
-        </div>
+      {context?.messages?.map((msg: message, index: number) => (
+        <Message status={msg.status} message={msg.message} user={msg.user} key={index} />
       ))}
     </div>
   );
