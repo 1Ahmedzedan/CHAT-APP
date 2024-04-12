@@ -11,18 +11,18 @@ import { useChatContext } from "../context/ChatStore";
 const Form = () => {
   const [input, setInput] = useState<string>("");
   const [openImojiList, setOpenImojiList] = useState<boolean>(false);
-  const context = useChatContext() ; 
+  const context = useChatContext();
 
   const handleMessageSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (input.trim() !== "") {
-      context?.addMessage?.(input, "send",context.username);
-      const to = context?.chatType === "public" ? "all" : context?.currentUser; 
-      console.log(to) ; 
+      context?.addMessage?.(input, "send", context.username);
+      const to = context?.chatType === "public" ? "all" : context?.currentUser;
+      console.log(to);
       const data = {
         to,
-        message:input,
-      }
+        message: input,
+      };
       socket.emit("chat message", data); // Send message to server
       setInput("");
     }
@@ -40,7 +40,7 @@ const Form = () => {
       >
         <button
           type="button"
-          className=" text-2xl text-gray-300 hover:text-gray-200 transition-all duration-500 mobile:text-2xl"
+          className=" text-2xl text-gray-300 transition-all duration-500 hover:text-gray-200 mobile:text-2xl"
           onClick={() => setOpenImojiList((e) => !e)}
         >
           {openImojiList ? <IoCloseSharp /> : <FaRegFaceSmileBeam />}
@@ -50,7 +50,15 @@ const Form = () => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           className="w-[60%] resize-none rounded bg-gray-50 px-3 py-2 text-sm focus:outline-none mobile:px-8 mobile:py-1 mobile:text-sm tablet:px-8 tablet:py-1 tablet:text-lg"
-        ></textarea>
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              e.currentTarget.form?.dispatchEvent(
+                new Event("submit", { bubbles: true }),
+              );
+            }
+          }}
+        />
 
         <button
           type="submit"
