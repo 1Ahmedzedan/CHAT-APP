@@ -1,6 +1,6 @@
 # Talk App
 
-Chat App is a real-time messaging application that allows users to communicate with each other instantly. It is built using Socket.IO for server-side communication, Node.js and Express for the backend, React.js with TypeScript for the frontend, Vite for project setup, Tailwind CSS for styling, and React Router and Context API for managing routes and state.
+Talk App is a real-time messaging application that allows users to communicate with each other instantly. It is built using Socket.IO for server-side communication, Node.js and Express for the backend, React.js with TypeScript for the frontend, Vite for project setup, Tailwind CSS for styling, and React Router and Context API for managing routes and state.
 
 ## Features
 
