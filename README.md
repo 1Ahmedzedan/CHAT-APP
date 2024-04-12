@@ -36,25 +36,9 @@ To get started with the Chat App, follow these steps:
 3. Start the server:
    ```bash
    cd ../server
-   npm start
-   ```
-4. Start the client:
-   ```bash
-   cd ../client
-   npm start
+   node app.js
    ```
 
 ## Usage
 
-Once the server and client are running, open your web browser and navigate to `http://localhost:3000` to access the Chat App. Sign in or create a new account to start chatting with other users.
-
-## Contributing
-
-If you'd like to contribute to the Chat App, please follow these guidelines:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes.
-4. Commit your changes (`git commit -am 'Add new feature'`).
-5. Push to the branch (`git push origin feature-branch`).
-6. Create a new Pull Request.
+Once the server and client are running, open your web browser and navigate to `http://localhost:3000` to access the Chat App.Enter username to start chatting with other users.
