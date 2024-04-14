@@ -42,7 +42,12 @@ To get started with the Chat App, follow these steps:
    cd ../server
    node app.js
    ```
+4. Start the client:
+   ```bash
+   cd ../client
+   npm run dev
+   ```
 
 ## Usage
 
-Once the server and client are running, open your web browser and navigate to `http://localhost:3000` to access the Chat App.Enter username to start chatting with other users.
+Once the server and client are running, open your web browser and navigate to `http://localhost:5173` to access the Chat App.Enter username to start chatting with other users.
